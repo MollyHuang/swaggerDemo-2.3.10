@@ -18,6 +18,16 @@ import java.util.ArrayList;
 public class SwaggerConfig {
 
     @Bean
+    public Docket docket1() {
+        return new Docket(DocumentationType.OAS_30).groupName("Group-3");
+    }
+
+    @Bean
+    public Docket docket2() {
+        return new Docket(DocumentationType.OAS_30).groupName("好班");
+    }
+
+    @Bean
     public Docket docket(Environment environment) {
         // Set up the wanted environment
         Profiles profiles = Profiles.of("dev", "test");
