@@ -19,6 +19,7 @@ public class SwaggerConfig {
     public Docket docket() {
         return new Docket(DocumentationType.OAS_30)
                 .apiInfo(apiInfo())
+                .enable(false)  // Enable Swagger UI, Default: true
                 .select()
                 .apis(RequestHandlerSelectors.basePackage("com.delta.swaggerDemo.controllers"))
                 .paths(PathSelectors.any())
