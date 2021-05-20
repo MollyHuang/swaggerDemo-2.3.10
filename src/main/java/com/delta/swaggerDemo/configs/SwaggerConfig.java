@@ -2,6 +2,8 @@ package com.delta.swaggerDemo.configs;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.env.Environment;
+import org.springframework.core.env.Profiles;
 import springfox.documentation.builders.PathSelectors;
 import springfox.documentation.builders.RequestHandlerSelectors;
 import springfox.documentation.service.ApiInfo;
@@ -16,10 +18,15 @@ import java.util.ArrayList;
 public class SwaggerConfig {
 
     @Bean
-    public Docket docket() {
+    public Docket docket(Environment environment) {
+        // Set up the wanted environment
+        Profiles profiles = Profiles.of("dev", "test");
+        // Check it is true or not
+        boolean flag = environment.acceptsProfiles(profiles);
+
         return new Docket(DocumentationType.OAS_30)
                 .apiInfo(apiInfo())
-                .enable(false)  // Enable Swagger UI, Default: true
+                .enable(flag)   // Enable Swagger UI or not, Default: true
                 .select()
                 .apis(RequestHandlerSelectors.basePackage("com.delta.swaggerDemo.controllers"))
                 .paths(PathSelectors.any())
