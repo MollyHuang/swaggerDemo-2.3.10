@@ -26,6 +26,7 @@ public class SwaggerConfig {
 
         return new Docket(DocumentationType.OAS_30)
                 .apiInfo(apiInfo())
+                .groupName("Molly-1")   // Change default group name
                 .enable(flag)
                 .select()
                 .apis(RequestHandlerSelectors.basePackage("com.delta.swaggerDemo.controllers"))
