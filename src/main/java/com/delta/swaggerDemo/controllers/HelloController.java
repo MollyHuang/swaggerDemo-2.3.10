@@ -6,6 +6,7 @@ import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -23,7 +24,19 @@ public class HelloController {
     }
 
     @GetMapping("/username")
-    public String getUserName(@ApiParam("使用者名稱") String username) {
+    public String getUserName(
+            @ApiParam("使用者名稱") String username) {
         return username;
+    }
+
+    @PostMapping("post")
+    public User postUser(
+            @RequestParam(required = true)
+            @ApiParam("用戶名")
+                    String username,
+            @RequestParam(required = true)
+            @ApiParam("密碼")
+                    String password) {
+        return new User(username, password);
     }
 }
